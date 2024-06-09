@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour
 
         if (selectedCardviews.Count.Equals(0))
         {
+            SoundManager.Instance.PlayFlipSound();
             selectedCardviews.Add(cardView);
             return true;
         }
@@ -103,13 +104,18 @@ public class GameController : MonoBehaviour
             return true;
         }
         selectedCardviews.Add(cardView);
+        SoundManager.Instance.PlayMissMatchSound();
         RemoveAllCards();
         return false;
     }
 
     public void ValidateSelectedCards()
     {
-        if(selectedCardviews.Count != RequiredCardPerMatchCount) return;
+        if (selectedCardviews.Count != RequiredCardPerMatchCount)
+        {
+            SoundManager.Instance.PlayFlipSound();
+            return;
+        }
         bool matchFound = true;
         for (int i = 0; i < selectedCardviews.Count; i++)
         {
@@ -122,13 +128,17 @@ public class GameController : MonoBehaviour
         
         if (matchFound)
         {
+            SoundManager.Instance.PlayMatchSound();
             MatchFoundedCount++;
             var foundedCards = selectedCardviews.ToArray();
             TurnUsedAndClearCards();
             gameView.MatchFounded(foundedCards);
 
-            if(IsWinning())
+            if (IsWinning())
+            {
+                SoundManager.Instance.PlayGameWonSound();
                 GameManager.Instance.SwitchPanel(GameState.GameWon);
+            }
         }
     }
 
@@ -144,9 +154,12 @@ public class GameController : MonoBehaviour
             TurnLeft--;
         
         selectedCardviews.Clear();
-        
-        if(turnLeft <= 0 && !IsWinning())
+
+        if (turnLeft <= 0 && !IsWinning())
+        {
+            SoundManager.Instance.PlayGameOverSound();
             GameManager.Instance.SwitchPanel(GameState.GameOver);
+        }
     }
     
     private void RemoveAllCards()

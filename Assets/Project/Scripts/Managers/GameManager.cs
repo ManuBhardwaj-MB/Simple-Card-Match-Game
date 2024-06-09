@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,12 +10,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gamePlayPanel;
     [SerializeField] private GameObject gameWonPanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameState startGameState;
     
-    [SerializeField] private GameState currentGameState;
     private void Awake() => Instance ??= this;
+
+    private void Start() => SwitchPanel(startGameState);
 
     public void PlayNow()
     {
+        SoundManager.Instance.PlayClickSound();
         SwitchPanel(GameState.Gameplay);
         GameController.Instance.LoadNewLevel(allLevels.GetLevel(SettingsManager.Instance.GetDifficultySettings()));
     }

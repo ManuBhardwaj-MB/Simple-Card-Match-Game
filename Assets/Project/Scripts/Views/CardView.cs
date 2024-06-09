@@ -31,7 +31,9 @@ public class CardView : MonoBehaviour
     public void OnClick()
     {
         if (!isSelected)
+        {
             SelectCard();
+        }
     }
 
     private void SelectCard()

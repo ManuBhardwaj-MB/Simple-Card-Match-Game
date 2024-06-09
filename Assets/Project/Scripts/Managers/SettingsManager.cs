@@ -27,14 +27,15 @@ public class SettingsManager : MonoBehaviour
         if (value < 0) value = 0;
         if (value > maxDifficultySettings) value = maxDifficultySettings;
         
+        SoundManager.Instance.PlayClickSound();
         PlayerPrefs.SetInt(saveDifficultySettingsKey, value);
-        
         OnDifficultySettingsChanged?.Invoke(value);
     }
 
     public void SetSfxOn(bool isOn)
     {
         PlayerPrefs.SetInt(saveSfxSettingsKey, GetIntFromBool(isOn));
+        SoundManager.Instance.PlayClickSound();
         OnSfxSettingsChanged?.Invoke(isOn);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,26 @@ public class GameView : MonoBehaviour
     [SerializeField] private AutoGridSizer autoGridSizer;
     [SerializeField] private List<CardView> loadedCards;
     private List<IEnumerator> matchFoundedEffectCoroutine;
-    
+
+    private void OnDisable()
+    {
+        ResetGameplayPanel();
+    }
+
     public void ResetGameplayPanel()
     {
+        if (matchFoundedEffectCoroutine != null)
+        {
+            for (int i = 0; i < matchFoundedEffectCoroutine.Count; i++)
+            {
+                if (matchFoundedEffectCoroutine[i] != null)
+                {
+                    StopCoroutine(matchFoundedEffectCoroutine[i]);
+                }
+            }
+            matchFoundedEffectCoroutine.Clear();
+        }
+        
         if (loadedCards != null && loadedCards.Count > 0)
         {
             foreach (var cardView in loadedCards)
@@ -20,6 +38,7 @@ public class GameView : MonoBehaviour
                     Destroy(cardView.gameObject);
             }
         }
+        
         loadedCards = new List<CardView>();
     }
     
@@ -70,7 +89,7 @@ public class GameView : MonoBehaviour
             }
         }
 
-        if (!emptyCoroutineFounded)
+        if (!emptyCoroutineFounded && this.gameObject.activeInHierarchy)
         {
             IEnumerator newMatchFoundedEffectCoroutine = MatchFoundedEffect(foundedCards);
             matchFoundedEffectCoroutine.Add(newMatchFoundedEffectCoroutine);
@@ -93,19 +112,7 @@ public class GameView : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        if (matchFoundedEffectCoroutine != null)
-        {
-            for (int i = 0; i < matchFoundedEffectCoroutine.Count; i++)
-            {
-                if (matchFoundedEffectCoroutine[i] != null)
-                {
-                    StopCoroutine(matchFoundedEffectCoroutine[i]);
-                }
-            }
-
-            matchFoundedEffectCoroutine.Clear();
-        }
-
+        SoundManager.Instance.PlayClickSound();
         ResetGameplayPanel();
         GameManager.Instance.SwitchPanel(GameState.MainMenu);
     }
