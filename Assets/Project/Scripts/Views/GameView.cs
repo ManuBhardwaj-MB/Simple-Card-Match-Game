@@ -52,6 +52,8 @@ public class GameView : MonoBehaviour
                 listOfCards.Add(new CardData(i,levelData[i]));
             }
         }
+
+        ShuffleList(listOfCards);
         
         for (int i = 0; i < listOfCards.Count; i++)
         {
@@ -61,6 +63,18 @@ public class GameView : MonoBehaviour
         }
 
         autoGridSizer.ResetAndUpdateGridLayout();
+    }
+    
+    public void ShuffleList<T>(List<T> list)
+    {
+        System.Random rng = new System.Random();
+        int n = list.Count;
+        
+        for (int i = n - 1; i > 0; i--)
+        {
+            int randomIndex = rng.Next(i + 1);
+            (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+        }
     }
     
     private void SelectCard(CardView selectedCard)

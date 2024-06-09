@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   info: Number of cards are required to be selected to make Match?
-  requiredCardPerMatchCount: 2
-  <MaxTurnsCount>k__BackingField: 8
+  requiredCardPerMatchCount: 3
+  <MaxTurnsCount>k__BackingField: 30
   <levelImages>k__BackingField:
   - {fileID: 1847463989, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: 793172594, guid: a03c2610221b14940b818fb271b448fa, type: 3}
@@ -23,4 +23,6 @@ MonoBehaviour:
   - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: 1218446674, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: -1337796959, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
   - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}
