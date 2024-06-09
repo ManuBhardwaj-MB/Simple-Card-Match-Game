@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e748a2f94c45588b4c954287989be4, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  info: Number of cards are required to be selected to make Match?
+  requiredCardPerMatchCount: 2
+  <MaxTurnsCount>k__BackingField: 8
+  <levelImages>k__BackingField:
+  - {fileID: 1847463989, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 793172594, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 1987916976, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 828239227, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 1366144071, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: 1218446674, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1337796959, guid: a03c2610221b14940b818fb271b448fa, type: 3}
+  - {fileID: -1595615294, guid: a03c2610221b14940b818fb271b448fa, type: 3}

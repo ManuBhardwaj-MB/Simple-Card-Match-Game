@@ -4,9 +4,10 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-
-    private const string saveTotalScoreKey = "TotalScoreSaveKey";
     public Action<long> OnScoreValueChanged;
+    
+    private const string saveTotalScoreKey = "TotalScoreSaveKey";
+    
     private void Awake()
     {
         if (Instance == null)

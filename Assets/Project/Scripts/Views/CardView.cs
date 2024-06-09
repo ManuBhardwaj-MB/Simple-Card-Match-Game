@@ -56,7 +56,8 @@ public class CardView : MonoBehaviour
         }
 
         onWrongSelectionCoroutine = WrongSelectionEffect();
-        StartCoroutine(onWrongSelectionCoroutine);
+        if(onWrongSelectionCoroutine!=null)
+            StartCoroutine(onWrongSelectionCoroutine);
     }
     
     private IEnumerator WrongSelectionEffect()
@@ -72,6 +73,16 @@ public class CardView : MonoBehaviour
         button.interactable = value;
     }
 
+    private void OnDestroy()
+    {
+        OnCardSelected = null;
+        if (onWrongSelectionCoroutine != null)
+        {
+            StopCoroutine(onWrongSelectionCoroutine);
+        }
+
+        onWrongSelectionCoroutine = null;
+    }
 
     //it will Disable the Panel, Which hides the card
     private void UpdateCardUI() => cardBack.SetActive(!isSelected);

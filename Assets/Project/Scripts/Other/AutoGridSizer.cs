@@ -1,6 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class AutoGridSizer : MonoBehaviour
 {
@@ -14,13 +15,25 @@ public class AutoGridSizer : MonoBehaviour
     private GridLayoutGroup gridLayoutGroup;
     private Vector2 newCardSize;
     private int lastItemCount;
-    
+    private IEnumerator updateGridLayoutCoroutine;
+    private WaitForSeconds waitForLayoutUpdate = new WaitForSeconds(0.5f);
     void Awake()
     {
         gridLayoutGroup ??= GetComponent<GridLayoutGroup>();
         rectTransform ??= GetComponent<RectTransform>();
     }
-    
+
+    private void OnDisable()
+    {
+        lastItemCount = -1;
+        if (updateGridLayoutCoroutine != null)
+        {
+            StopCoroutine(updateGridLayoutCoroutine);
+        }
+
+        updateGridLayoutCoroutine = null;
+    }
+
 #if UNITY_EDITOR
     [TextArea(1,1)] public string info = "Update Function will not be part of build as screen Size Will be fixed";
     private void OnValidate()
@@ -34,11 +47,32 @@ public class AutoGridSizer : MonoBehaviour
     }
 #endif
     
-    public void UpdateLayout()
+    public void ResetAndUpdateGridLayout()
+    {
+        lastItemCount = -1;
+        if (updateGridLayoutCoroutine != null)
+        {
+            StopCoroutine(updateGridLayoutCoroutine);
+        }
+                
+        updateGridLayoutCoroutine = UpdateLayoutCoroutine();
+        StartCoroutine(updateGridLayoutCoroutine);
+    }
+
+    private IEnumerator UpdateLayoutCoroutine()
+    {
+        gridLayoutGroup.enabled = true;
+        UpdateLayout();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+        yield return waitForLayoutUpdate;
+        gridLayoutGroup.enabled = false;
+        
+    }
+    private void UpdateLayout()
     {
         if (lastItemCount != rectTransform.childCount || isUpdatingPerFrame)
         {
-            if (!gridLayoutGroup.enabled)
+            if (!gridLayoutGroup.isActiveAndEnabled)
                 gridLayoutGroup.enabled = true;
             
             width = rectTransform.rect.width;
@@ -62,12 +96,6 @@ public class AutoGridSizer : MonoBehaviour
             
             gridLayoutGroup.cellSize = newCardSize;
             lastItemCount = rectTransform.childCount;
-        }
-
-        if (!isUpdatingPerFrame)
-        {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
-            gridLayoutGroup.enabled = false;
         }
     }
     
