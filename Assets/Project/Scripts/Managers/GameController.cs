@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     private int localScore;
     private int turnLeft;
     private int totalMatchesRequired;
+    private int scorePerMatch;
     
     [SerializeField] private GameView gameView;
     [SerializeField] private List<CardView> selectedCardviews;
@@ -75,6 +76,7 @@ public class GameController : MonoBehaviour
     private void SetupLevelSettings(Level levelToLoad)
     {
         selectedCardviews.Clear();
+        scorePerMatch = levelToLoad.ScorePerMatch;
         totalMatchesRequired = levelToLoad.levelImages.Length;
         TurnLeft = levelToLoad.MaxTurnsCount;
         LocalScore = 0;
@@ -128,6 +130,7 @@ public class GameController : MonoBehaviour
         
         if (matchFound)
         {
+            LocalScore += scorePerMatch;
             SoundManager.Instance.PlayMatchSound();
             MatchFoundedCount++;
             var foundedCards = selectedCardviews.ToArray();
@@ -137,6 +140,7 @@ public class GameController : MonoBehaviour
             if (IsWinning())
             {
                 SoundManager.Instance.PlayGameWonSound();
+                ScoreManager.Instance.AddScoreToTotalScore(LocalScore);
                 GameManager.Instance.SwitchPanel(GameState.GameWon);
             }
         }

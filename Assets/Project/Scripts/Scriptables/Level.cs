@@ -19,6 +19,7 @@ public class Level : ScriptableObject
     
     [SerializeField][Range(2,4)] private int requiredCardPerMatchCount = 2;
     [field: SerializeField] public int MaxTurnsCount { get; private set;}
+    [field: SerializeField] public int ScorePerMatch { get; private set;}
     [field: SerializeField] public Sprite[] levelImages { get; private set;}
     
     public int GetRequiredMatchesCount => (requiredCardPerMatchCount < 2) ? 2 : requiredCardPerMatchCount;//Just precaution😅
