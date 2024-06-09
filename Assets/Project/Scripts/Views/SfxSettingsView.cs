@@ -32,7 +32,6 @@ public class SfxSettingsView : MonoBehaviour
     private void ShowSettingsUI(bool value)
     {
         activeIndicatorImage.color = value ? onLightColor : offLightColor;
-        GameManager.Instance.Log("UI >> Mainmenu >> SfxSettingsUI Updated: " + value);
     }
     
     public void SetSettings()

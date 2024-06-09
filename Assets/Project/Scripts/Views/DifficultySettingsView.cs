@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,7 +36,6 @@ public class DifficultySettingsView : MonoBehaviour
             var property = difficultyIndicators[i];
             property.color = (value.Equals(i)) ? onLightColor : offLightColor;
         }
-        GameManager.Instance.Log("UI >> Mainmenu >> DifficultySettingsUI Updated: " + value);
     }
     
     public void SetSettings(int value)

@@ -30,7 +30,6 @@ public class LocalScoreView : MonoBehaviour
     private void ShowUI(int value)
     {
         textMatchFounded.text = $"{prefix}{value}";
-        GameManager.Instance.Log("UI >> gameplay >> matchCountUI Updated: " + value);
     }
 
 }

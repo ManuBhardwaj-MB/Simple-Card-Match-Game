@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [SerializeField] private LevelHolder allLevels;
-    [SerializeField] private bool debugLoggingIsOn;
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject gamePlayPanel;
     [SerializeField] private GameObject gameWonPanel;
@@ -49,12 +47,5 @@ public class GameManager : MonoBehaviour
         gamePlayPanel.gameObject.SetActive(false);
         gameWonPanel.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
-    }
-
-
-    public void Log(string value)
-    {
-        if(!debugLoggingIsOn || !Debug.unityLogger.logEnabled) return;
-        Debug.Log(value);
     }
 }

@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Level Holder", menuName = "Configs/Levels/New-Level-Holder", order = 0)]

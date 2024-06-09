@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour
             matchFoundedCount = value;
         }
     }
-
     public int LocalScore
     {
         get => localScore;
@@ -39,7 +38,6 @@ public class GameController : MonoBehaviour
             localScore = value;
         }
     }
-
     public int TurnLeft
     {
         get => turnLeft;
@@ -52,11 +50,8 @@ public class GameController : MonoBehaviour
     
     private void Awake() => Instance ??= this;
     
-    public void LoadNewLevel(Level level)
-    {
-        GenerateLevel(level);
-    }
-    
+    public void LoadNewLevel(Level level) => GenerateLevel(level);
+
     private void GenerateLevel(Level levelToLoad)
     {
         SetupLevelSettings(levelToLoad);
@@ -118,7 +113,7 @@ public class GameController : MonoBehaviour
             SoundManager.Instance.PlayFlipSound();
             return;
         }
-        bool matchFound = true;
+        var matchFound = true;
         for (int i = 0; i < selectedCardviews.Count; i++)
         {
             if (!selectedCardviews[0].Id.Equals(selectedCardviews[i].Id))

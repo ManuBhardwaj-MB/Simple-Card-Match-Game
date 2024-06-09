@@ -29,6 +29,5 @@ public class TotalScoreView : MonoBehaviour
     private void ShowSettingsUI(long value)
     {
         textTotalScore.text = value.ToString();
-        GameManager.Instance.Log("UI >> Mainmenu >> TotalScores Updated: " + value);
     }
 }
